@@ -2,16 +2,15 @@ import React from "react";
 import { render } from "react-dom";
 import DevTools from "mobx-react-devtools";
 
-import TodoList from "./components/TodoList";
-import TodoListModel from "./models/TodoListModel";
-import TodoModel from "./models/TodoModel";
+import NewTodoList from "./components/NewTodoList";
+import TodoStore from "./stores/TodoStore"
 
-const store = new TodoListModel();
+const store = new TodoStore();
 
 render(
   <div>
     <DevTools />
-    <TodoList store={store} />
+    <NewTodoList store={store}/>
   </div>,
   document.getElementById("root")
 );
