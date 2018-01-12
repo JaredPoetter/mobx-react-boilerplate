@@ -19,7 +19,23 @@ import { observer } from "mobx-react";
                 <input
                     type="checkbox"
                     checked={this.props.todo.finished}
-                    onClick={() => (this.props.todo.finished = !this.props.todo.finished)}
+                    onClick={() => {
+                    this.props.todo.finished = !this.props.todo.finished
+                    //debugger;
+                    this.props.store.todos.forEach(function(elem) {
+                        console.log(elem);
+                    });
+                    for(let i=0; i < this.props.store.todos.length; i++) {
+                        console.log("FOR loop idx: " + i);
+                        if (this.props.todo.finished) {
+                            if (this.props.store.todos[i].numero == this.props.todo.numero) {
+                                this.props.store.todos.splice(i,1);
+                            }
+                        }
+                    }
+                    console.log(this.props.store)
+                    }
+                }
                 />
                 {this.props.todo.title}
             </li>

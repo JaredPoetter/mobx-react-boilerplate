@@ -2,6 +2,7 @@ import { observable, computed, action } from "mobx";
 
 export default class TodoListModel {
     @observable todos = [];
+    @observable dones = [];
 
     @computed
     get unfinishedTodoCount() {
@@ -10,9 +11,11 @@ export default class TodoListModel {
 
     @action
     addTodo(title) {
+        let numero = Math.random()
         this.todos.push({
             finished: false,
             title: title,
+            numero: numero,
         });
     }
 }

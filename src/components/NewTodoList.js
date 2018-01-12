@@ -12,17 +12,23 @@ import NewTodo from "./NewTodo"
             <div>
                 <form onSubmit={this.handleFormSubmit}>
                     Add Todo:
-          <input
+                    <input
                         type="text"
                         value={this.newTodoTitle}
                         onChange={this.handleInputChange}
                     />
                     <button type="submit">Add</button>
+                    
+                    
+
                 </form>
+                <button onClick={this.handleClear}>Clear</button>
+                <button onClick={this.handlePurge}>Purge</button>
+                    
                 <hr />
                 <ul>
                     {this.props.store.todos.map((todo, index) => (
-                        <NewTodo todo={todo} key={index} />
+                        <NewTodo todo={todo} key={index} store={this.props.store} />
                     ))}
                 </ul>
                 Tasks left: {this.props.store.unfinishedTodoCount}
@@ -30,8 +36,10 @@ import NewTodo from "./NewTodo"
         );
     }
 
+
     @action handleInputChange = e => {
         this.newTodoTitle = e.target.value;
+        console.log(e.target.value);
     };
 
     @action handleFormSubmit = e => {
@@ -39,4 +47,19 @@ import NewTodo from "./NewTodo"
         this.newTodoTitle = "";
         e.preventDefault();
     };
+
+    @action handleClear = e => {
+        //this.newTodoTitle = "";
+        let popped = this.props.store.todos.pop();
+        console.log("Popped " + this.props.store.todos[0].title);
+        //debugger;
+    };
+
+    @action handlePurge = e => {
+        console.log("Attempting to purge");
+        this.props.store.todos = [];
+        if (this.props.store.todos == []) {
+            console.log("List Purged.")
+        }
+    }
 }
